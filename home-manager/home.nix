@@ -18,4 +18,21 @@
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
+
+  # Packages to install
+  home.packages = [ pkgs.bat ];
+
+  # Git
+  programs.git = {
+    enable = true;
+    extraConfig = {
+      init.defaultBranch = "main";
+      push = {
+        autoSetupRemote = true;
+        default = "simple";
+      };
+    };
+    userEmail = "oizquierdo@stackbuilders.com";
+    userName = "Oscar Izquierdo";
+  };
 }
