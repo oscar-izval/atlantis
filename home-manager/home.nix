@@ -5,8 +5,12 @@
 
   home.sessionVariables = {
     # https://nix-community.github.io/home-manager/index.html#sec-install-standalone
-    NIX_PATH = "$HOME/.nix-defexpr/channels:/nix/var/nix/profiles/per-user/root/channels\${NIX_PATH:+:$NIX_PATH}";
+    NIX_PATH =
+      "$HOME/.nix-defexpr/channels:/nix/var/nix/profiles/per-user/root/channels\${NIX_PATH:+:$NIX_PATH}";
   };
+
+  # https://github.com/NixOS/nixpkgs/issues/196651
+  manual.manpages.enable = false;
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
