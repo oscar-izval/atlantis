@@ -11,7 +11,7 @@
   programs.bat.enable = true;
   programs.direnv.enable = true;
   programs.htop.enable = true;
-  home.packages = [ pkgs.nixfmt pkgs.nil ];
+  home.packages = [ pkgs.nixfmt pkgs.nil pkgs.wget pkgs.jq pkgs.tmate ];
 
   # Git
   programs.git = {
@@ -31,14 +31,12 @@
     enable = true;
     dotDir = ".config/zsh";
     initExtra = ''
+      . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
+
       if [ -e "/opt/homebrew/bin/brew" ]; then
         eval "$(/opt/homebrew/bin/brew shellenv)"
       fi
-
-      . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
     '';
-
-    enableAutosuggestions = false;
 
     shellAliases = {
       gaa = "git add --all";
