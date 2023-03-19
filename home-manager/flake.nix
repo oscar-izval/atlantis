@@ -1,29 +1,32 @@
 {
-  description = "Home Manager configuration of oizquierdo";
-
   inputs = {
-    # Specify the source of Home Manager and Nixpkgs.
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "nixpkgs/nixpkgs-unstable";
+    darwin.url = "github:lnl7/nix-darwin";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs = { nixpkgs, home-manager, ... }:
-    let
-      system = "aarch64-darwin";
-      pkgs = nixpkgs.legacyPackages.${system};
+  outputs = { self, darwin, home-manager, nixpkgs }: {
+    darwinConfigurations = let
+      mkDarwinSystem = system:
+        darwin.lib.darwinSystem {
+          inherit system;
+          modules = [
+            ./configuration.nix
+            home-manager.darwinModules.home-manager
+            {
+              home-manager = {
+                backupFileExtension = "bak";
+                users.oizquierdo = import ./home.nix;
+              };
+            }
+          ];
+        };
     in {
-      homeConfigurations.oizquierdo = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-
-        # Specify your home configuration modules here, for example,
-        # the path to your home.nix.
-        modules = [ ./home.nix ];
-
-        # Optionally use extraSpecialArgs
-        # to pass through arguments to home.nix
-      };
+      "mbp.home" = mkDarwinSystem "aarch64-darwin";
+      "ghactions" = mkDarwinSystem "x86_64-darwin";
     };
+  };
 }
