@@ -1,22 +1,17 @@
 { config, pkgs, ... }:
 
 {
+  home.username = "oizquierdo";
+  home.homeDirectory = "/Users/oizquierdo";
   home.stateVersion = "22.11";
-
-  home.sessionVariables = {
-    # https://nix-community.github.io/home-manager/index.html#sec-install-standalone
-    NIX_PATH =
-      "$HOME/.nix-defexpr/channels:/nix/var/nix/profiles/per-user/root/channels\${NIX_PATH:+:$NIX_PATH}";
-  };
-
-  # https://github.com/NixOS/nixpkgs/issues/196651
-  manual.manpages.enable = false;
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
   programs.bat.enable = true;
-  # home.packages = [ pkgs.bat ];
+  programs.direnv.enable = true;
+  programs.htop.enable = true;
+  home.packages = [ pkgs.nixfmt pkgs.nil ];
 
   # Git
   programs.git = {
@@ -32,12 +27,15 @@
     userName = "Oscar Izquierdo";
   };
 
-  programs.direnv.enable = true;
-
-  # Zsh
   programs.zsh = {
     enable = true;
     dotDir = ".config/zsh";
+    initExtra = ''
+      . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
+    '';
+
+    enableAutosuggestions = false;
+
     shellAliases = {
       gaa = "git add --all";
       gc = "git commit -v";
