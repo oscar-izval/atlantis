@@ -14,14 +14,15 @@
     let
       system = "aarch64-darwin";
       pkgs = nixpkgs.legacyPackages.${system};
-    in
-    {
-      formatter.${system} = nixpkgs.legacyPackages.${system}.nixpkgs-fmt;
-      homeConfigurations.oizquierdo = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        # Specify your home configuration modules here, for example,
-        # the path to your home.nix.
-        modules = [ ./home.nix ];
-      };
+    in {
+      formatter.${system} =
+        nixpkgs.legacyPackages.${system}.nixpkgs-fmt; # Run nix fmt
+      homeConfigurations.oizquierdo =
+        home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          # Specify your home configuration modules here, for example,
+          # the path to your home.nix.
+          modules = [ ./home.nix ];
+        };
     };
 }
