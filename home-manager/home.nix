@@ -49,6 +49,7 @@
       gdup = "git diff @{upstream}";
       gl = "git pull";
       gp = "git push";
+      gpf = "git push --force";
       gst = "git status";
       glo = "git log --oneline --decorate";
     };
