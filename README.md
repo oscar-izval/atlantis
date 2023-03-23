@@ -1,12 +1,11 @@
 # Atlantis - My user configuration w/ Home Manager
 
 # Requirements
-Install Nix and enable Flakes.
+Install [Nix](https://nixos.org/download.html) and enable [Flakes](https://nixos.wiki/wiki/Flakes).
 
 # Usage
-1. Clone the repo
-2. Create symlink -> `ln -s ~/atlantis/home-manager ~/.config/home-manager`
-3. Run `nix run home-manager/master -- switch` to build and activate the configuration for the first time. Then you can use `home-manager switch`.
+1. Run `bin/build` to build the configuration.
+2. Run `bin/switch` to switch to the new configuration.
 
 # Inspired by
 - [sestrella/nix-darwin-config](https://github.com/sestrella/nix-darwin-config)
