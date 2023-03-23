@@ -8,21 +8,27 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    darwin = {
+      url = "github:lnl7/nix-darwin/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { nixpkgs, home-manager, ... }:
+  outputs = { nixpkgs, home-manager, darwin, ... }:
     let
       system = "aarch64-darwin";
-      pkgs = nixpkgs.legacyPackages.${system};
+      pkgs = import nixpkgs { inherit system; };
     in {
-      formatter.${system} =
-        nixpkgs.legacyPackages.${system}.nixpkgs-fmt; # Run nix fmt
-      homeConfigurations.oizquierdo =
-        home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
-          # Specify your home configuration modules here, for example,
-          # the path to your home.nix.
-          modules = [ ./home.nix ];
-        };
+      darwinConfigurations."mbp" = darwin.lib.darwinSystem {
+        inherit system;
+        modules = [
+          ./configuration.nix
+          home-manager.darwinModules.home-manager
+          {
+            home-manager.users.oizquierdo = import ./home.nix;
+            home-manager.backupFileExtension = "bak";
+          }
+        ];
+      };
     };
 }
