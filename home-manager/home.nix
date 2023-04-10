@@ -65,6 +65,8 @@
       gpf = "git push --force-with-lease";
       gst = "git status";
       glo = "git log --oneline --decorate";
+      # Kubernetes
+      k = "kubectl";
     };
     oh-my-zsh = {
       enable = true;
