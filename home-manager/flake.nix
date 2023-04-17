@@ -16,16 +16,16 @@
 
   outputs = { nixpkgs, home-manager, darwin, ... }:
     let
-      system = "aarch64-darwin";
+      system = "x86_64-darwin";
       pkgs = import nixpkgs { inherit system; };
     in {
-      darwinConfigurations."mbp" = darwin.lib.darwinSystem {
+      darwinConfigurations."mbpSS" = darwin.lib.darwinSystem {
         inherit system;
         modules = [
           ./configuration.nix
           home-manager.darwinModules.home-manager
           {
-            home-manager.users.oizquierdo = import ./home.nix;
+            home-manager.users.oizquierdo = import ./home_ss.nix;
             home-manager.backupFileExtension = "bak";
           }
         ];

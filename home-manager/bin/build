@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-nix build .#darwinConfigurations.mbp.system
+nix build .#darwinConfigurations.mbpSS.system
