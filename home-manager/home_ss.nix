@@ -11,7 +11,7 @@
   programs.bat.enable = true;
   programs.direnv.enable = true;
   programs.htop.enable = true;
-  home.packages = [ pkgs.nixfmt pkgs.nil pkgs.wget pkgs.jq pkgs.tmate ];
+  home.packages = [ pkgs.nixfmt pkgs.nil pkgs.wget ];
 
   # Git
   programs.git = {
@@ -23,7 +23,7 @@
         default = "simple";
       };
     };
-    userEmail = "oizquierdo@stackbuilders.com";
+    userEmail = "oscar.izquierdo@tvc.simspace.com";
     userName = "Oscar Izquierdo";
   };
 
@@ -69,7 +69,7 @@
     oh-my-zsh = {
       enable = true;
       theme = "robbyrussell";
-      plugins = [ "kubectl" ];
+      plugins = [];
     };
   };
 }
