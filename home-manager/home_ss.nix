@@ -11,7 +11,7 @@
   programs.bat.enable = true;
   programs.direnv.enable = true;
   programs.htop.enable = true;
-  home.packages = [ pkgs.nixfmt pkgs.nil pkgs.wget ];
+  home.packages = [ pkgs.git pkgs.nixfmt pkgs.nil pkgs.wget ];
 
   # Git
   programs.git = {
