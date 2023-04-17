@@ -1,5 +1,5 @@
 {
-  description = "Home Manager configuration of oizquierdo";
+  description = "Home Manager configuration of oscar.izquierdo";
 
   inputs = {
     # Specify the source of Home Manager and Nixpkgs.
@@ -19,13 +19,13 @@
       system = "x86_64-darwin";
       pkgs = import nixpkgs { inherit system; };
     in {
-      darwinConfigurations."mbpSS" = darwin.lib.darwinSystem {
+      darwinConfigurations."Oscars-MacBook-Pro" = darwin.lib.darwinSystem {
         inherit system;
         modules = [
           ./configuration.nix
           home-manager.darwinModules.home-manager
           {
-            home-manager.users.oizquierdo = import ./home_ss.nix;
+            home-manager.users."oscar.izquierdo" = import ./home_ss.nix;
             home-manager.backupFileExtension = "bak";
           }
         ];

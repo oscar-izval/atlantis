@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-nix build .#darwinConfigurations.mbpSS.system
+nix build .#darwinConfigurations.Oscars-MacBook-Pro.system

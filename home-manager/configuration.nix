@@ -1,5 +1,5 @@
 { pkgs, ... }: {
-  users.users.oizquierdo = { home = "/Users/oizquierdo"; };
+  users.users."oscar.izquierdo" = { home = "/Users/oscar.izquierdo"; };
   services.nix-daemon.enable = true;
 
   nix = {

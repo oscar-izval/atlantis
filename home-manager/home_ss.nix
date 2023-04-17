@@ -1,8 +1,8 @@
 { config, pkgs, ... }:
 
 {
-  home.username = "oizquierdo";
-  home.homeDirectory = "/Users/oizquierdo";
+  home.username = "oscar.izquierdo";
+  home.homeDirectory = "/Users/oscar.izquierdo";
   home.stateVersion = "22.11";
 
   # Let Home Manager install and manage itself.
@@ -23,7 +23,7 @@
         default = "simple";
       };
     };
-    userEmail = "oscar.izquierdo@tvc.simspace.com";
+    userEmail = "25722135+oscar-izval@users.noreply.github.com";
     userName = "Oscar Izquierdo";
   };
 
