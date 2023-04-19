@@ -11,7 +11,7 @@
   programs.bat.enable = true;
   programs.direnv.enable = true;
   programs.htop.enable = true;
-  home.packages = [ pkgs.nixfmt pkgs.nil pkgs.wget ];
+  home.packages = [ pkgs.nixfmt pkgs.nil pkgs.wget pkgs.sops ];
 
   # Git
   programs.git = {
@@ -69,7 +69,7 @@
     oh-my-zsh = {
       enable = true;
       theme = "robbyrussell";
-      plugins = [];
+      plugins = [ "kubectl" ];
     };
   };
 }

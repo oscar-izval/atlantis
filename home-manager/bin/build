@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-nix build .#darwinConfigurations.Oscars-MacBook-Pro.system
+nix build .#darwinConfigurations.ECM046LMBP-1.system

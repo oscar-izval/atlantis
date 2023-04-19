@@ -19,7 +19,7 @@
       system = "x86_64-darwin";
       pkgs = import nixpkgs { inherit system; };
     in {
-      darwinConfigurations."Oscars-MacBook-Pro" = darwin.lib.darwinSystem {
+      darwinConfigurations."ECM046LMBP-1" = darwin.lib.darwinSystem {
         inherit system;
         modules = [
           ./configuration.nix
