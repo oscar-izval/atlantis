@@ -30,6 +30,23 @@
   programs.zsh = {
     enable = true;
     dotDir = ".config/zsh";
+    envExtra = ''
+      # Kustomize env variables
+      export XDG_CONFIG_HOME=$HOME/.config
+      export GPG_TTY=$(tty)
+      source <(/usr/local/bin/kustomize completion zsh)
+
+      # Kustomize autocompletion
+      if [[ ! -f /usr/local/share/zsh/site-functions/_kustomize ]]; then
+        completion="$(kustomize completion zsh)"
+        cat > /usr/local/share/zsh/site-functions/_kustomize <<EOF
+      ''${completion}
+      compdef _kustomize kustomize
+      EOF
+
+      autoload -Uz compinit && compinit
+      fi
+    '';
     initExtra = ''
       . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
 
