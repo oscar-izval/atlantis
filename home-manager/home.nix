@@ -23,7 +23,7 @@
         default = "simple";
       };
     };
-    userEmail = "oizquierdo@stackbuilders.com";
+    userEmail = "25722135+oscar-izval@users.noreply.github.com";
     userName = "Oscar Izquierdo";
   };
 
