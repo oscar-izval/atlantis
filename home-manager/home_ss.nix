@@ -11,7 +11,16 @@
   programs.bat.enable = true;
   programs.direnv.enable = true;
   programs.htop.enable = true;
-  home.packages = [ pkgs.nixfmt pkgs.nil pkgs.wget pkgs.sops pkgs.gnupg ];
+  home.packages = with pkgs; [
+    nixfmt
+    nil
+    wget
+    sops
+    gnupg
+    fly
+    (google-cloud-sdk.withExtraComponents
+      [ google-cloud-sdk.components.gke-gcloud-auth-plugin ])
+  ];
 
   # Git
   programs.git = {
@@ -86,9 +95,7 @@
     oh-my-zsh = {
       enable = true;
       theme = "robbyrussell";
-      plugins = [
-        "kubectl"
-      ];
+      plugins = [ "kubectl" ];
     };
   };
 }
