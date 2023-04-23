@@ -22,6 +22,23 @@
       [ google-cloud-sdk.components.gke-gcloud-auth-plugin ])
   ];
 
+  # Neovim
+  programs.neovim = {
+    enable = true;
+    defaultEditor = true;
+    viAlias = true;
+    vimAlias = true;
+    extraConfig = ''
+        set number
+        colorscheme codedark
+    '';
+    plugins = [
+      pkgs.vimPlugins.vim-code-dark
+      (pkgs.vimPlugins.nvim-treesitter.withPlugins
+        (p: [ p.tree-sitter-nix p.tree-sitter-terraform ]))
+    ];
+  };
+
   # Git
   programs.git = {
     enable = true;
