@@ -13,6 +13,23 @@
   programs.htop.enable = true;
   home.packages = [ pkgs.nixfmt pkgs.nil pkgs.wget pkgs.jq pkgs.tmate ];
 
+  # Neovim
+  programs.neovim = {
+    enable = true;
+    defaultEditor = true;
+    viAlias = true;
+    vimAlias = true;
+    extraConfig = ''
+        set number
+        colorscheme codedark
+    '';
+    plugins = [
+      pkgs.vimPlugins.vim-code-dark
+      (pkgs.vimPlugins.nvim-treesitter.withPlugins
+        (p: [ p.tree-sitter-nix p.tree-sitter-terraform ]))
+    ];
+  };
+
   # Git
   programs.git = {
     enable = true;
