@@ -108,6 +108,7 @@
       gpf = "git push --force-with-lease";
       gst = "git status";
       glo = "git log --oneline --decorate";
+      reload-iboss = "sudo /Applications/Utilities/iboss.app/gen4agent/reconfigure.sh unload && sudo /Applications/Utilities/iboss.app/gen4agent/reconfigure.sh load";
     };
     oh-my-zsh = {
       enable = true;
