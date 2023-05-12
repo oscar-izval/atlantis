@@ -12,6 +12,10 @@
   programs.direnv.enable = true;
   programs.htop.enable = true;
   home.packages = with pkgs; [
+    kubectl
+    kustomize
+    stern
+    yamllint
     nixfmt
     nil
     wget
@@ -29,8 +33,8 @@
     viAlias = true;
     vimAlias = true;
     extraConfig = ''
-        set number
-        colorscheme codedark
+      set number
+      colorscheme codedark
     '';
     plugins = [
       pkgs.vimPlugins.vim-code-dark
@@ -56,19 +60,12 @@
   programs.zsh = {
     enable = true;
     dotDir = ".config/zsh";
+    initExtraBeforeCompInit = ''
+      fpath+=("${config.home.profileDirectory}"/share/zsh/site-functions "${config.home.profileDirectory}"/share/zsh/$ZSH_VERSION/functions "${config.home.profileDirectory}"/share/zsh/vendor-completions)
+    '';
     envExtra = ''
-      # Kustomize env variables
-      export XDG_CONFIG_HOME=$HOME/.config
-      export GPG_TTY=$(tty)
-
-      # Kustomize autocompletion
-      if [[ ! -f /usr/local/share/zsh/site-functions/_kustomize ]]; then
-        completion="$(/usr/local/bin/kustomize completion zsh)"
-        cat > /usr/local/share/zsh/site-functions/_kustomize <<EOF
-      ''${completion}
-      compdef _kustomize kustomize
-      EOF
-      fi
+      # Krew plugins
+      export PATH=$PATH:$HOME/.krew/bin
     '';
     initExtra = ''
       . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
@@ -90,8 +87,8 @@
         echo master
       }
 
-      # Reload autocompletions
-      autoload -Uz compinit && compinit
+      # Manually source autocompletion for packages not working being on $fpath
+      source $(dirname $(dirname $(readlink -f $(which fly))))/share/zsh/site-functions/_fly
     '';
 
     shellAliases = {
@@ -108,7 +105,9 @@
       gpf = "git push --force-with-lease";
       gst = "git status";
       glo = "git log --oneline --decorate";
-      reload-iboss = "sudo /Applications/Utilities/iboss.app/gen4agent/reconfigure.sh unload && sudo /Applications/Utilities/iboss.app/gen4agent/reconfigure.sh load";
+      reload-iboss =
+        "sudo /Applications/Utilities/iboss.app/gen4agent/reconfigure.sh unload && sudo /Applications/Utilities/iboss.app/gen4agent/reconfigure.sh load";
+      k = "kubectl";
     };
     oh-my-zsh = {
       enable = true;
