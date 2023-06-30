@@ -14,6 +14,9 @@
   home.packages = with pkgs; [
     kubectl
     kustomize
+    jq
+    tree
+    watch
     stern
     yamllint
     nixfmt
@@ -46,6 +49,10 @@
   # Git
   programs.git = {
     enable = true;
+    signing = {
+      signByDefault = true;
+      key = "47EB108E9D5C074E";
+    };
     extraConfig = {
       init.defaultBranch = "main";
       push = {
@@ -66,6 +73,8 @@
     envExtra = ''
       # Krew plugins
       export PATH=$PATH:$HOME/.krew/bin
+      export XDG_CONFIG_HOME=$HOME/.config
+      export GPG_TTY=$(tty)
     '';
     initExtra = ''
       . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
